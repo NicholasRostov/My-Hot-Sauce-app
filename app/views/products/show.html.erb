@@ -1,0 +1,7 @@
+<p> Name: <%= @product.name %></p>
+<p> Description: <%= @product.description %></p>
+<p> Intensity: <%= @product.intensity %></p>
+<p> Price: <%= @product.price %></p>
+<%= form_tag "/products/#{@product.id}", method: :delete do %>
+  <input type="submit" value="Destroy Product">
+<% end %>

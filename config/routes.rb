@@ -1,4 +1,13 @@
 Rails.application.routes.draw do
- get "/first_sauce", to: "products#first_sauce" 
- get "/all_sauces", to: "products#all_sauce"
+
+  root to: "recipes#index"
+
+ get "/products", to:"products#index"
+ get "products/new", to: "products#new"
+ post "/products", to: "products#create"
+ get "/products/:id", to: "products#show"
+ get "/products/:id/edit", to: "products#edit"
+ patch"/products/:id", to: "products#update"
+ delete "/products/:id", to:"products#destroy"
+
 end

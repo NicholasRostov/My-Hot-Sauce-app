@@ -1,7 +1,8 @@
 <h1>All Sauces</h1>
-<% @allsauce.each do |s| %>
-<p><%= s.name %></p>
+<% @product.each do |s| %>
+<a href="/products/<%= s.id %>" =><%= s.name %></a>
 <p><%= s.description %></p>
 <p><%= s.intensity %></p>
 <p><%= s.price %></p>
+<p>----------</p>
 <% end %>

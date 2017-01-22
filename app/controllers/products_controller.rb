@@ -1,12 +1,42 @@
 class ProductsController < ApplicationController
   
-  def first_sauce
-  @sauce = Product.first
-  render "hotsauce_display.html.erb"
+
+  def index
+    @product = Product.all
+    render "index.html.erb"
+  end
+  def show
+    @product = Product.find_by(id: params[:id])
+    render "show.html.erb"
   end
 
-  def all_sauce
-    @allsauce = Product.all
-    render "all_hotsauces.html.erb"
+  def new
+    render "new.html.erb"
+  end
+
+  def create
+    @product = Product.new(name: params[:name], description: params[:description], intensity: params[:intensity], price: params[:price])
+    @product.save
+
+    @product = Product.new(name: params[:name], description: params[:description], intensity: params[:intensity], price: params[:price])
+    render "create.html.erb"
+  end
+
+  def edit
+    @product = Product.find_by(id: params[:id])
+    render "edit.html.erb"
+  end
+
+  def update
+    @product = Product.find_by(id: params[:id])
+    @product.assign_attributes(name: params[:name], description: params[:description], intensity: params[:intensity], price: params[:price])
+    @product.save
+    render "update.html.erb"
+  end
+
+  def destroy
+    @product = Product.find_by(id: params[:id])
+    @product.destroy
+    render "destroy.html.erb"
   end
 end
