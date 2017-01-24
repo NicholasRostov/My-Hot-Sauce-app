@@ -18,8 +18,7 @@ class ProductsController < ApplicationController
     @product = Product.new(name: params[:name], description: params[:description], intensity: params[:intensity], price: params[:price])
     @product.save
 
-    @product = Product.new(name: params[:name], description: params[:description], intensity: params[:intensity], price: params[:price])
-    render "create.html.erb"
+    redirect_to "/products/#{@product.id}"
   end
 
   def edit
@@ -31,12 +30,12 @@ class ProductsController < ApplicationController
     @product = Product.find_by(id: params[:id])
     @product.assign_attributes(name: params[:name], description: params[:description], intensity: params[:intensity], price: params[:price])
     @product.save
-    render "update.html.erb"
+    redirect_to "/products/#{@product.id}"
   end
 
   def destroy
     @product = Product.find_by(id: params[:id])
     @product.destroy
-    render "destroy.html.erb"
+    redirect_to "/products"
   end
 end

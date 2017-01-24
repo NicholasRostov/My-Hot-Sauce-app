@@ -4,4 +4,6 @@
 <p> Price: <%= @product.price %></p>
 <%= form_tag "/products/#{@product.id}", method: :delete do %>
   <input type="submit" value="Destroy Product">
+<%= link_to "Delete Me", "/products/#{@product.id}", method: :delete %>
+
 <% end %>
