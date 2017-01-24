@@ -17,7 +17,7 @@ class ProductsController < ApplicationController
   def create
     @product = Product.new(name: params[:name], description: params[:description], intensity: params[:intensity], price: params[:price])
     @product.save
-
+    flash[:succes] = "Your contact has been created!"
     redirect_to "/products/#{@product.id}"
   end
 
@@ -30,12 +30,14 @@ class ProductsController < ApplicationController
     @product = Product.find_by(id: params[:id])
     @product.assign_attributes(name: params[:name], description: params[:description], intensity: params[:intensity], price: params[:price])
     @product.save
+    flash[:info] = "Your contact has been updated!"
     redirect_to "/products/#{@product.id}"
   end
 
   def destroy
     @product = Product.find_by(id: params[:id])
     @product.destroy
+    flash[:danger] = "Contact has been deleted"
     redirect_to "/products"
   end
 end
