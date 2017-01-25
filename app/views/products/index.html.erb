@@ -1,8 +1,19 @@
 <h1>All Sauces</h1>
-<% @product.each do |s| %>
-<a href="/products/<%= s.id %>" =><%= s.name %></a>
-<p><%= s.description %></p>
-<p><%= s.intensity %></p>
-<p><%= s.price %></p>
-<p>----------</p>
+<% @products.each_slice(3) do |three_p| %>
+  <div class="row">
+    <% three_p.each do |s| %>
+    <div class="col-md-4">
+      <div class="well">
+        <a href="/products/<%= s.id %>" =><%= s.name %></a>
+        <p><%= s.description %></p>
+        
+        <p><%= s.intensity %></p>
+        <p><%= s.price %></p>
+        <p>Added at:</p>
+        <p><%= s.time %></p>
+        <img src="<%= s.image %>">
+      </div>
+    </div>
+    <% end %>
+  </div>
 <% end %>
