@@ -12,10 +12,10 @@ class Product < ApplicationRecord
   end
 
   def tax
-  (price[1..-1].to_f * 0.09).round(2)
+    price * 0.09
   end
 
   def total
-    tax + price[1..-1].to_f
+    tax + price
   end
 end
