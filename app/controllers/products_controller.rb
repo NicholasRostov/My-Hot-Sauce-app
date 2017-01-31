@@ -21,7 +21,7 @@ class ProductsController < ApplicationController
   else
     @product = Product.find_by(id: params[:id])
   end
-    render "show.html.erb"
+      render "show.html.erb"
   end
 
   def new
@@ -29,7 +29,7 @@ class ProductsController < ApplicationController
   end
 
   def create
-    @product = Product.new(name: params[:name], description: params[:description], intensity: params[:intensity], price: params[:price])
+    @product = Product.new(name: params[:name], description: params[:description], intensity: params[:intensity], price: params[:price], supplier_id: params[:supplier_id])
     @product.save
     flash[:succes] = "Your contact has been created!"
     redirect_to "/products/#{@product.id}"
@@ -53,5 +53,9 @@ class ProductsController < ApplicationController
     @product.destroy
     flash[:danger] = "Contact has been deleted"
     redirect_to "/products"
+  end
+
+  def one
+    @first = Photo.first()
   end
 end

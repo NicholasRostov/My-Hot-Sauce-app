@@ -4,6 +4,9 @@
 <p> Price: <%= @product.price %></p>
 <p> Tax: $<%= @product.tax %>
 <p> Total: $<%= @product.total %></p>
+<p>Supplier: <%= @product.supplier.name %></p>
+<%= @products.photos.each do |image| %>
+<p>Photo: <img src="<%= image.url %>" alt="<%= @product.name %>"</p>
 <p><%= @product.sale_massage %></p>
 <%= form_tag "/products/#{@product.id}", method: :delete do %>
   <input type="submit" value="Destroy Product">
