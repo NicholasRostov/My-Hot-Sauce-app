@@ -1,4 +1,6 @@
-<h1>All Sauces</h1>
+<% if current_user %>
+<h2> Hello <%= current_user.name %>!</h2>
+<% end %>
 <% @products.each_slice(3) do |three_p| %>
   <div class="row">
     <% three_p.each do |s| %>

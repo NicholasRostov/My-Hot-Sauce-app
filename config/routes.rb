@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  root to: "recipes#index"
+  root to: "products#index"
 
  get "/products", to:"products#index"
  get "products/new", to: "products#new"
@@ -11,4 +11,12 @@ Rails.application.routes.draw do
  delete "/products/:id", to:"products#destroy"
  get "products/newimg", to:"products#show"
 
+ # sign up routes
+ get "/signup", to: "users#new"
+ post "/users", to: "users#create"
+
+ # user log in
+ get "/login", to: "sessions#new"
+ post "/login", to: "sessions#create"
+ get "/logout", to: "sessions#destroy"
 end
