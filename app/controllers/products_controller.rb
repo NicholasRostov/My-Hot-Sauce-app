@@ -9,10 +9,7 @@ class ProductsController < ApplicationController
     @products = Product.all.order(sort_attribute => params[:order])
     elsif sale
     @products = Product.where("price <?", 2)  
-      
   end
-
-    
     render "index.html.erb"
   end
   def show

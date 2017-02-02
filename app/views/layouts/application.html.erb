@@ -52,10 +52,10 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sign in/out <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <% if current_user %>
-            <li><%= link_to "Log out", "/logout" %></li>
+              <li><a href="/logout">Logout</a></li>
             <% else %>
-            <li><a href="/login">Login</a></li>
-            <li><a href="/sign_up">Sign up</a></li>
+              <li><%= link_to "Log in", "/login" %></li>
+              <li><a href="/signup">Sign up</a></li>
             <% end %>
             <li role="separator" class="divider"></li>
             <li><a href="#">Separated link</a></li>
