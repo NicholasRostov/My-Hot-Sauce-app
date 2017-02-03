@@ -2,6 +2,7 @@ class Product < ApplicationRecord
   
   belongs_to :supplier
   has_many :photos
+  has_many :orders
 
   def time
     created_at.strftime("%b %d, %Y")

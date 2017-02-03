@@ -13,3 +13,19 @@
 <%= link_to "Delete Me", "/products/#{@product.id}", method: :delete %>
 <% end %>
 <% end %>
+
+<%= form_tag "/orders", method: :post do %>
+
+<div>
+ Quantity:
+<input type="text" name="quantity">
+</div>
+
+<div>
+ Enter product id:
+<input type="text" name="product_id">
+</div>
+
+<input type="submit" value="Buy now!">
+
+<% end %>
