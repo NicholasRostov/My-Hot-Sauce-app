@@ -9,6 +9,7 @@
 <p>Subtotal: <%= @order.subtotal %></p>
 <p>Tax: <%= @order.tax %></p>
 <p>Order total <%= @order.total %></p>
+<p>Ordere email: <%= @order.user.email %></p>
 <% else %>
 <p> To view orders, please log in.</p>
 <% end %>
