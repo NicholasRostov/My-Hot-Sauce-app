@@ -4,6 +4,7 @@ class Product < ApplicationRecord
   has_many :photos
   has_many :orders
   has_many :product_categories
+  has_many :categories, through: :product_categories
 
   def time
     created_at.strftime("%b %d, %Y")
