@@ -14,7 +14,7 @@
 <% end %>
 <% end %>
 
-<%= form_tag "/orders", method: :post do %>
+<%= form_tag "/cart", method: :post do %>
 
 <div>
  Quantity:
@@ -26,6 +26,6 @@
 <input type="text" name="product_id">
 </div>
 
-<input type="submit" value="Buy now!">
+<input type="submit" value="Add to cart">
 
 <% end %>

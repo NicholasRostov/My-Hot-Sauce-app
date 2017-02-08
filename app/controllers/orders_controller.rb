@@ -1,9 +1,12 @@
 class OrdersController < ApplicationController
   def create
-    product = Product.find_by(id: params[:product_id])
-    @order = Order.new(quantity: params[:quantity], user_id: current_user.id, product_id: params[:product_id], subtotal: (product.price * params[:quantity].to_d), tax: (product.tax * params[:quantity].to_d), total: (product.total * params[:quantity].to_d))
-    @order.save
-    redirect_to "/orders/#{@order.id}"
+    carted_product = current_user.carted_products.where(status: "carted")
+    order = Order.new(user_id: current_user.id) 
+    order.save
+    order.confirm_order(carted_product)
+    order.find_absolute_total
+    redirect_to "/orders/#{order.id}"
+    
   end
 
   def show

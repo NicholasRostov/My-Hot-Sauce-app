@@ -4,12 +4,15 @@
 <% elsif current_user %>
 <h1>Here are your orders!</h1>
 <p>Order id: <%= @order.id %></p>
-<p> Product id :<%= @order.product_id %></p>
-<p> Quantity: <%= @order.quantity %></p>
+<p><% @order.carted_products.each do |x| %></p>
+<p> Product id :<%= x.product.name %></p>
+<img src="<%= x.product.photos.first.url %>">
+<p> Quantity: <%= x.quantity %></p>
 <p>Subtotal: <%= @order.subtotal %></p>
 <p>Tax: <%= @order.tax %></p>
 <p>Order total <%= @order.total %></p>
-<p>Ordere email: <%= @order.user.email %></p>
+<p>Order email: <%= @order.user.email %></p>
+<% end %>
 <% else %>
 <p> To view orders, please log in.</p>
 <% end %>
