@@ -26,19 +26,30 @@ class ProductsController < ApplicationController
   end
 
   def new
+    if current_user.admn?
     render "new.html.erb"
+    else
+    redirect_to "/products"
+    end
   end
 
   def create
+    if current_user.admn
     @product = Product.new(name: params[:name], description: params[:description], intensity: params[:intensity], price: params[:price], supplier_id: params[:supplier_id])
     @product.save
     flash[:succes] = "Your contact has been created!"
     redirect_to "/products/#{@product.id}"
+    else
+    redirect_to "/products"
   end
 
   def edit
+    if current_user.admn
     @product = Product.find_by(id: params[:id])
     render "edit.html.erb"
+    else
+      redirect_to "/products"
+    end
   end
 
   def update
@@ -50,13 +61,18 @@ class ProductsController < ApplicationController
   end
 
   def destroy
+    if current_user.admn?
     @product = Product.find_by(id: params[:id])
     @product.destroy
     flash[:danger] = "Contact has been deleted"
     redirect_to "/products"
+    else
+    redirect_to "/products"
   end
+end
 
   def one
     @first = Photo.first()
+  end
   end
 end

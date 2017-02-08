@@ -5,6 +5,8 @@
   <div>
     <h2><%= cart.product.name %></h2>
     <%= cart.quantity %>
+    <%= link_to "Delete Product?", "/carted_products/#{carted_product.id}", method: :delete %>
+    <% end %>
  </div>
 
 <% end %>

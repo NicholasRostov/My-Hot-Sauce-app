@@ -7,10 +7,12 @@ class CartedProductsController < ApplicationController
   end
 
   def index
-    if current_user.carted_prodcuts.where(status:"") == []
-
-    @cartedproducts = CartedProduct.all.where(status: "carted")
-    else "redirect_to"
+     @cartedproducts = if current_user.carted_prodcuts.where(status:"carted")
+      if carted_products.any?
+        render "index.html.erb"
+      else
+        redirect_to "/"
+      end
     end
   end
 end
