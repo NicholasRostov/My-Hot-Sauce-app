@@ -31,7 +31,6 @@ class ProductsController < ApplicationController
   end
 
   def create
-    
     @product = Product.new(name: params[:name], description: params[:description], intensity: params[:intensity], price: params[:price], supplier_id: params[:supplier_id])
     if @product.save
       @product.photos.create(url: params[:url])
@@ -40,38 +39,34 @@ class ProductsController < ApplicationController
     else
       flash[:error] = "You stupid"
     render "new.html.erb"
+    end
   end
 
   def edit
-    
     @product = Product.find_by(id: params[:id])
-    if @product.save
-      flash[:succes] = "Yayyy it has been updated"
-      redirect_to "/products/#{@product.id}"
-    else
-      flash[:error] = "Stop Hammer time!"
-    render "edit.html.erb"
+    
   end
 
   def update
     @product = Product.find_by(id: params[:id])
     @product.assign_attributes(name: params[:name], description: params[:description], intensity: params[:intensity], price: params[:price])
-    @product.save
-    flash[:info] = "Your product has been updated!"
-    redirect_to "/products/#{@product.id}"
+    if @product.save
+      flash[:succes] = "Yayyy it has been updated"
+      redirect_to "edit.html.erb"
+    else
+      flash[:error] = "Stop Hammer time!"
+    render "/products/#{@product.id}"
+    end
   end
 
   def destroy
-    
     @product = Product.find_by(id: params[:id])
     @product.destroy
     flash[:danger] = "Product has been deleted"
     redirect_to "/products"
-  
-end
+  end
 
   def one
     @first = Photo.first()
   end
-end
 end

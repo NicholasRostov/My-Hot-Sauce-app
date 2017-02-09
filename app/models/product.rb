@@ -1,4 +1,4 @@
-class Product < ApplicationRecord
+eclass Product < ApplicationRecord
   
   belongs_to :supplier
   has_many :photos
