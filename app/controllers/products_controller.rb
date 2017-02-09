@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
-  
-
+  # before_action :authenticate_user!, only: [:new, :create, :update, :destroy]
+  before_action :authenticate_admn!, except: [:index, :show]
   def index
     sale = params[:sale]
     sort_attribute = params[:sort]
@@ -25,54 +25,53 @@ class ProductsController < ApplicationController
       render "show.html.erb"
   end
 
-  def new
-    if current_user.admn?
+  def new  
+    @product = Product.new
     render "new.html.erb"
-    else
-    redirect_to "/products"
-    end
   end
 
   def create
-    if current_user.admn
+    
     @product = Product.new(name: params[:name], description: params[:description], intensity: params[:intensity], price: params[:price], supplier_id: params[:supplier_id])
-    @product.save
-    flash[:succes] = "Your contact has been created!"
+    if @product.save
+      @product.photos.create(url: params[:url])
+    flash[:succes] = "Your product has been created!"
     redirect_to "/products/#{@product.id}"
     else
-    redirect_to "/products"
+      flash[:error] = "You stupid"
+    render "new.html.erb"
   end
 
   def edit
-    if current_user.admn
+    
     @product = Product.find_by(id: params[:id])
-    render "edit.html.erb"
+    if @product.save
+      flash[:succes] = "Yayyy it has been updated"
+      redirect_to "/products/#{@product.id}"
     else
-      redirect_to "/products"
-    end
+      flash[:error] = "Stop Hammer time!"
+    render "edit.html.erb"
   end
 
   def update
     @product = Product.find_by(id: params[:id])
     @product.assign_attributes(name: params[:name], description: params[:description], intensity: params[:intensity], price: params[:price])
     @product.save
-    flash[:info] = "Your contact has been updated!"
+    flash[:info] = "Your product has been updated!"
     redirect_to "/products/#{@product.id}"
   end
 
   def destroy
-    if current_user.admn?
+    
     @product = Product.find_by(id: params[:id])
     @product.destroy
-    flash[:danger] = "Contact has been deleted"
+    flash[:danger] = "Product has been deleted"
     redirect_to "/products"
-    else
-    redirect_to "/products"
-  end
+  
 end
 
   def one
     @first = Photo.first()
   end
-  end
+end
 end

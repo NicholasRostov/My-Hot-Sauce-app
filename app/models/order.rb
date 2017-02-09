@@ -2,6 +2,9 @@
   belongs_to :user
   has_many :carted_products
 
+  validates :subtotal, :tax, :total, greater_than: 0
+
+
   def sub_tot
     self.subtotal = 0
     carted_products.each do |cartedproduct|

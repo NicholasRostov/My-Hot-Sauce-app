@@ -7,6 +7,12 @@ class Product < ApplicationRecord
   has_many :categories, through: :product_categories
   has_many :carted_products
 
+  validates :name, :price, :description, presence: true
+  validates :name, uniqueness: true
+  validates :name, length: { minimum: 3 }
+  validates :description, length: { maximum: 500 }
+  validates :price, :format => { :with => /\A\d+(?:\.\d{0,2})?\z/ }, :numericality => {:greater_than => 0, messages:"Must be a price"}
+
   def time
     created_at.strftime("%b %d, %Y")
   end

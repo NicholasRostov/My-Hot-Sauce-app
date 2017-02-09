@@ -8,9 +8,11 @@
 <% @product.photos.each do |image| %>
 <p>Photo: <img src="<%= image.url %>" alt="<%= @product.name %>"</p>
 <p><%= @product.sale_massage %></p>
+<% if current_user && current_user.admn %>
 <%= form_tag "/products/#{@product.id}", method: :delete do %>
   <input type="submit" value="Destroy Product">
 <%= link_to "Delete Me", "/products/#{@product.id}", method: :delete %>
+<% end %>
 <% end %>
 <% end %>
 
@@ -27,5 +29,6 @@
 </div>
 
 <input type="submit" value="Add to cart">
+
 
 <% end %>

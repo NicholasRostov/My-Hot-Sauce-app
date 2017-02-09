@@ -1,34 +1,42 @@
-<p>Here is your order:</p>
-<p> Name: <%= @product.name %></p>
-<p> Description: <%= @product.description %></p>
-<p> Intensity: <%= @product.intensity %></p>
-<p> Price: <%= @product.price %></p>
-<p> Tax: $<%= @product.tax %>
-<p> Total: $<%= @product.total %></p>
-<p>Supplier: <%= @product.supplier.name %></p>
-<% @product.photos.each do |image| %>
-<p>Photo: <img src="<%= image.url %>" alt="<%= @product.name %>"</p>
-<p><%= @product.sale_massage %></p>
-<%= form_tag "/products/#{@product.id}", method: :delete do %>
-  <input type="submit" value="Destroy Product">
-<%= link_to "Delete Me", "/products/#{@product.id}", method: :delete %>
-<% end %>
+<h1>New Product:</h1>
+
+<% if @product.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@product.errors.count, "error") %> prohibited this article from being saved:</h2>
+ 
+    <ul>
+    <% @product.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
 <% end %>
 
-<%= form_tag "/orders", method: :post do %>
+<%= form_tag "/products", method: :post do %>
 
 <div>
- Quantity:
-<input type="text" name="quantity">
+Name:
+<input type="text" name="name">
+  
 </div>
 
-<input type="submit" value="Buy now!">
+<div>
+  Description:
+  <input type="text" name="description">
+</div>
 
-<% end %>
+<div>
+Intensity:
+  <input type="text" name="intensity">
+</div>
 
+<div>
+Price:
+  <input type="text" name="price" >
+</div>
+<input type="submit" name="Aprietame">
 
-
-
+ <% end %>
 
 
 
